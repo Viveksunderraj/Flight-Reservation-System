@@ -8,11 +8,11 @@ public class Booking {
 	private String bookingCustomerName;
 	private int numberOfSeatsBooked;
 	private double bookingCost;
-	private ScheduledAirCrafts scheduledAirCraft;
+	private ScheduledAirCraft scheduledAirCraft;
 	
 	
 	public Booking(String bookingCustomerName, int numberOfSeatsBooked,
-			ScheduledAirCrafts scheduledAirCraft, Date date) {
+			ScheduledAirCraft scheduledAirCraft, Date date) {
 		this.bookingID = getNextID();
 		this.bookingCustomerName = bookingCustomerName;
 		this.numberOfSeatsBooked = numberOfSeatsBooked;
@@ -24,17 +24,6 @@ public class Booking {
 		synchronized (Booking.class) {
 			return bookingIDCounter++;
 		}
-	}
-	
-	private synchronized static int getNextID1() {
-		
-			return bookingIDCounter++;
-		
-	}
-	
-	private synchronized  int getNextID2() {
-		
-		return bookingIDCounter++;
 	}
 	
 	public void setBookingCost(double bookingCost) {

@@ -29,7 +29,10 @@ public class Route {
 	}
 	
 	private static int getNextID() {
-		return routeIDCounter++;
+		
+		synchronized (Route.class) {
+			return routeIDCounter++;
+		}
 	}
 	
 	public int getRouteID() {

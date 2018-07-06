@@ -15,7 +15,9 @@ public class AirCraft {
 	}
 	
 	private static int getNextID() {
-		return airCraftIDCounter++;
+		synchronized (AirCraft.class) {
+			return airCraftIDCounter++;
+		}
 	}
 	
 	public int getAirCraftId() {
@@ -24,7 +26,7 @@ public class AirCraft {
 
 	@Override
 	public String toString() {
-		return "Air Craft Name = " + airCraftName + ", Air Craft ID = " + airCraftID + ", Total Seats = " + totalNumberOfSeats;
+		return " [Air Craft Name = " + airCraftName + ", Air Craft ID = " + airCraftID + ", Total Seats = " + totalNumberOfSeats +"] ";
 	}
 
 	

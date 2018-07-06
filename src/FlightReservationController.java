@@ -4,9 +4,9 @@ import java.util.Map.Entry;
 
 public class FlightReservationController {
 	
-	private HashMap<Integer, Route> routeList = new HashMap<>();;
+	private HashMap<Integer, Route> routeList = new HashMap<>();
 	private HashMap<Integer, AirCraft> airCraftList = new HashMap<>();
-	private HashMap<Route, ArrayList<ScheduledAirCrafts>> scheduleList = new HashMap<Route, ArrayList<ScheduledAirCrafts>>();
+	private HashMap<Route, ArrayList<ScheduledAirCraft>> scheduleList = new HashMap<Route, ArrayList<ScheduledAirCraft>>();
 	private ArrayList<Booking> bookingList = new ArrayList<>();
 	
 	
@@ -19,8 +19,8 @@ public class FlightReservationController {
 		airCraftList.put(newAirCraft.getAirCraftId(), newAirCraft);
 	}
 	
-	public void addSchedules(ScheduledAirCrafts newSchedule) {
-		ArrayList<ScheduledAirCrafts> scheduleDetailsList;
+	public void addSchedules(ScheduledAirCraft newSchedule) {
+		ArrayList<ScheduledAirCraft> scheduleDetailsList;
 		Route route = newSchedule.getRoute();
 		if(scheduleList.containsKey(route)){
 		    // if the key has already been used,
@@ -32,7 +32,7 @@ public class FlightReservationController {
 		    // if the key hasn't been used yet,
 		    // we'll create a new Linked List object, add the value
 		    // and put it in the list with the new key
-			scheduleDetailsList = new ArrayList<ScheduledAirCrafts>();
+			scheduleDetailsList = new ArrayList<ScheduledAirCraft>();
 			scheduleDetailsList.add(newSchedule);
 		    scheduleList.put(route, scheduleDetailsList);
 		}
@@ -44,8 +44,7 @@ public class FlightReservationController {
 	
 	
 	
-	//METHODS FOR GETTING A PARTICULAR OBJECT FROM TEH LIST
-	
+	//METHODS FOR GETTING A PARTICULAR OBJECT FROM THE LIST
 	public Route getRoute(int routeID) {
 		Route route = routeList.get(routeID);
 		
@@ -66,10 +65,10 @@ public class FlightReservationController {
 		
 	}
 	
-	public ScheduledAirCrafts getSchedule(Route route, int ScheduleID) {
-		ArrayList<ScheduledAirCrafts> scheduleDetailsList = scheduleList.get(route);
+	public ScheduledAirCraft getSchedule(Route route, int ScheduleID) {
+		ArrayList<ScheduledAirCraft> scheduleDetailsList = scheduleList.get(route);
 		
-		for(ScheduledAirCrafts schedule : scheduleDetailsList) {
+		for(ScheduledAirCraft schedule : scheduleDetailsList) {
 			if(schedule.getScheduleID() == ScheduleID) {
 				return schedule;
 			}
@@ -88,13 +87,13 @@ public class FlightReservationController {
 	}
 	
 	public void displayScheduledAirCrafts(Route route) {
-		ArrayList<ScheduledAirCrafts> scheduleDetailsList = scheduleList.get(route);
+		ArrayList<ScheduledAirCraft> scheduleDetailsList = scheduleList.get(route);
 		if(scheduleDetailsList == null) {
 			System.out.println("SORRY NO FLIGHTS HAVE BEEN SCHEDULED FOR THIS ROUTE");
 			return;
 		}
 		
-		for(ScheduledAirCrafts schedule : scheduleDetailsList) {
+		for(ScheduledAirCraft schedule : scheduleDetailsList) {
 			System.out.println(schedule.toString());
 		}
 	}

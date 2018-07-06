@@ -19,7 +19,7 @@ public class FlightReservationSystem {
 	}
 	
 	private void createSchedules(int routeID, int airCraftID, int BC_PRICE, int EC_PRICE, int departureTime, int arrivalTime, String date) {
-		ScheduledAirCrafts newSchedule = new ScheduledAirCrafts(flight.getRoute(routeID), flight.getAirCraft(airCraftID), BC_PRICE, EC_PRICE, departureTime, arrivalTime, date);
+		ScheduledAirCraft newSchedule = new ScheduledAirCraft(flight.getRoute(routeID), flight.getAirCraft(airCraftID), BC_PRICE, EC_PRICE, departureTime, arrivalTime, date);
 		flight.addSchedules(newSchedule);
 	}
 	
@@ -95,7 +95,7 @@ public class FlightReservationSystem {
 		printSeparator();
 		System.out.println("SELECT A FLIGHT ID");
 		flightID = sc.nextInt();
-		ScheduledAirCrafts selectedSchedule = flight.getSchedule(selectedRoute, flightID);
+		ScheduledAirCraft selectedSchedule = flight.getSchedule(selectedRoute, flightID);
 		if(selectedSchedule == null) {
 			System.out.println("PLEASE ENTER A VALID FLIGHT ID");
 		}
@@ -144,6 +144,7 @@ public class FlightReservationSystem {
 					if((row = convertCharNumtoNum(seatNumber.charAt(0))) != -1 && (col = convertCharToNum(Character.toUpperCase(seatNumber.charAt(1)))) != -1){
 						
 						Seats seat = selectedSchedule.getSeat(row-1, col);
+						if(seat.getSeatStatus() == false) {
 						Passenger newPassenger = new Passenger(passengerName, passengerAge);
 						
 						if(seat.getSeatType() == Seats.SeatType.BUISNESS_CLASS) {
@@ -160,6 +161,11 @@ public class FlightReservationSystem {
 						
 						bookingCost += seatPrice;
 						System.out.println("SUCCESSFULLY BOOKED SEAT");
+						}
+						else {
+							System.out.println("SEAT ALREADY BOOKED PLEASE SELECT ANOTHER SEAT");
+							return;
+						}
 					}
 					else {
 						System.out.println("ENTER A VALID SEAT NUMBER");
